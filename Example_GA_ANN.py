@@ -4,16 +4,26 @@ import pickle
 import ANN
 import random
 import matplotlib.pyplot
+from sklearn.datasets import load_iris
 
-f = open("dataset_features.pkl", "rb")
-data_inputs2 = pickle.load(f)
-f.close()
+
+dataset=load_iris()
+data_inputs2 = numpy.array(dataset.data)
+data_outputs = numpy.array(dataset.target)
 features_STDs = numpy.std(a=data_inputs2, axis=0)
-data_inputs = data_inputs2[:, features_STDs>50]
+data_inputs = data_inputs2[:,]
 
-f = open("outputs.pkl", "rb")
-data_outputs = pickle.load(f)
-f.close()
+# f = open("dataset_features.pkl", "rb")
+# data_inputs2 = pickle.load(f)
+# f.close()
+# features_STDs = numpy.std(a=data_inputs2, axis=0)
+
+# data_inputs = data_inputs2[:, features_STDs>50]
+# print(features_STDs)
+
+# f = open("outputs.pkl", "rb")
+# data_outputs = pickle.load(f)
+# f.close()
 
 
 
@@ -70,7 +80,7 @@ while generation < num_generations and gbest[1]-m<5:
     pbest[1]=0
 
     for i in range(len(x)):
-        fitness = ANN.fitness(x[i], data_inputs, data_outputs, activation="sigmoid")
+        fitness = ANN.fitness(x[i], data_inputs, data_outputs)
         acc[i] = fitness[0]
         if acc[i]>gbest[1]:
              gbest[1] = acc[i]
