@@ -5,6 +5,7 @@ import ANN
 import random
 import matplotlib.pyplot
 from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
 
 
 dataset=load_iris()
@@ -25,8 +26,6 @@ data_inputs = data_inputs2[:,]
 # data_outputs = pickle.load(f)
 # f.close()
 
-
-
 num_generations = 20
 mutation_percent = 10
 
@@ -38,15 +37,15 @@ for i in range(10):
     initial_pop_weights = []
     initial_v = []
 
-    HL1_neurons = 6
+    HL1_neurons = 5
     input_HL1_weights = numpy.random.uniform(low=-0.1, high=0.1, size=(data_inputs.shape[1], HL1_neurons))
     input_HL1_v = numpy.random.uniform(low=-0.1, high=0.1, size=(data_inputs.shape[1], HL1_neurons))
 
-    HL2_neurons = 5
+    HL2_neurons = 4
     HL1_HL2_weights = numpy.random.uniform(low=-0.1, high=0.1, size=(HL1_neurons, HL2_neurons))
     HL1_HL2_v = numpy.random.uniform(low=-0.1, high=0.1, size=(HL1_neurons, HL2_neurons))
 
-    output_neurons = 4
+    output_neurons = 3
     HL2_output_weights = numpy.random.uniform(low=-0.1, high=0.1, size=(HL2_neurons, output_neurons))
     HL2_output_v = numpy.random.uniform(low=-0.1, high=0.1, size=(HL2_neurons, output_neurons))
 
@@ -99,4 +98,8 @@ while generation < num_generations and gbest[1]-m<5:
                 v[i][0][j][k]+=(random.uniform(0,c1)*(x[pbest[0]][0][j][k]-x[i][0][j][k]) + random.uniform(0,c2)*(x[gbest[0]][0][j][k]-x[i][0][j][k]))
                 x[i][0][j][k]+=v[i][0][j][k]
 
+plt.plot(range(generation),accuracies)
+plt.xlabel('Iteration')
+plt.ylabel('Accuracy')
+plt.show()
 print(accuracies)
