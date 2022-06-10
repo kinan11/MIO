@@ -6,6 +6,7 @@ import random
 import matplotlib.pyplot
 from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
+import math
 
 
 dataset=load_iris()
@@ -69,6 +70,7 @@ pbest = [0,0]
 c1=2.05
 c2=2.05
 m=0
+xi= 2/math.fabs(2-(c1+c2)-math.sqrt(c1+c2)*(c1+c2)-4*(c1+c2))
 
 generation = 0
 while generation < num_generations and gbest[1]-m<5:
@@ -95,7 +97,9 @@ while generation < num_generations and gbest[1]-m<5:
     for i in range(len(x)):
         for j in range(len(x[i][0])):
             for k in range(len(x[i][0][j])):
-                v[i][0][j][k]+=(random.uniform(0,c1)*(x[pbest[0]][0][j][k]-x[i][0][j][k]) + random.uniform(0,c2)*(x[gbest[0]][0][j][k]-x[i][0][j][k]))
+                #v[i][0][j][k]+=(random.uniform(0,c1)*(x[pbest[0]][0][j][k]-x[i][0][j][k]) + random.uniform(0,c2)*(x[gbest[0]][0][j][k]-x[i][0][j][k])) #klasyczny
+                #v[i][0][j][k] += xi*((random.uniform(0, c1) * (x[pbest[0]][0][j][k] - x[i][0][j][k]) + random.uniform(0, c2) * ( x[gbest[0]][0][j][k] - x[i][0][j][k])) ) # ze współczynnikiem scisku
+                v[i][0][j][k] = random.uniform(0.4, 0.9)*v[i][0][j][k] + (random.uniform(0, c1) * (x[pbest[0]][0][j][k] - x[i][0][j][k]) + random.uniform(0, c2) * (x[gbest[0]][0][j][k] - x[i][0][j][k])) #inertia-weight
                 x[i][0][j][k]+=v[i][0][j][k]
 
 plt.plot(range(generation),accuracies)
