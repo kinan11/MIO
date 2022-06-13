@@ -28,7 +28,7 @@ custom_tgt = []
 for instance in data:
     custom_tgt.append(assign_centroid(centroids, instance))
 
-colors = ['r', 'g', 'y']
+colors = ['r', 'g', 'b']
 plt.figure(figsize=(9,8))
 for instance, tgt in zip(data, custom_tgt):
     plt.scatter(instance[0], instance[1], s=50, edgecolor='w',
