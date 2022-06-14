@@ -1,8 +1,5 @@
 import numpy as np
 
-def sigmoid(input):
-    return 1.0/(1.0+np.exp(-1*input))
-
 def relu(inpt):
     result = inpt
     result[inpt<0] = 0
@@ -16,8 +13,6 @@ def predict_outputs(weights_mat, data_inputs, data_outputs, activation="relu"):
             r1 = np.matmul(r1, curr_weights)
             if activation == "relu":
                 r1 = relu(r1)
-            elif activation == "sigmoid":
-                r1 = sigmoid(r1)
         predicted_label = np.where(r1 == np.max(r1))[0][0]
         predictions[sample_idx] = predicted_label
     correct_predictions = np.where(predictions == data_outputs)[0].size
