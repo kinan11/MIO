@@ -1,29 +1,26 @@
-import matplotlib.pyplot as plt
-
 import numpy as np
-from abc_algorithm import ABC
-from objective_function import SumOfSquaredErrors
-
+import matplotlib.pyplot as plt
+from ArtificialBeeColony.abc_algorithm import ABC
+from ArtificialBeeColony.objective_function import SumOfSquaredErrors
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import MinMaxScaler
 
-data = MinMaxScaler().fit_transform(load_iris()['data'][:, [1,3]])
-
-objective_function = SumOfSquaredErrors(dim=6, n_clusters=3, data=data)
-optimizer = ABC(obj_function=objective_function, colony_size=30,
-                n_iter=300, max_trials=100)
-optimizer.optimize()
-
 def decode_centroids(centroids, n_clusters, data):
     return centroids.reshape(n_clusters, data.shape[1])
-  
-centroids = dict(enumerate(decode_centroids(optimizer.optimal_solution.pos,
-                                            n_clusters=3, data=data)))
 
 def assign_centroid(centroids, point):
     distances = [np.linalg.norm(point - centroids[idx]) for idx in centroids]
     return np.argmin(distances)
-  
+
+data = MinMaxScaler().fit_transform(load_iris()['data'])
+
+objective_function = SumOfSquaredErrors(dim=6, n_clusters=3, data=data)
+
+optimizer = ABC(obj_function=objective_function, colony_size=30, n_iter=300, max_trials=100)
+optimizer.optimize()
+
+centroids = dict(enumerate(decode_centroids(optimizer.optimal_solution.pos, n_clusters=3, data=data)))
+
 custom_tgt = []
 for instance in data:
     custom_tgt.append(assign_centroid(centroids, instance))

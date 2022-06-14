@@ -1,5 +1,5 @@
-from artificial_bee import ArtificialBee
 import numpy as np
+from ArtificialBeeColony.artificial_bee import ArtificialBee
 
 class OnLookerBee(ArtificialBee):
 

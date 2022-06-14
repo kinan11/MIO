@@ -1,16 +1,10 @@
-import matplotlib.pyplot as plt
-
-from abc_algorithm import ABC
-from objection_function import Iris
 import ANN
-
+import numpy as np
+import matplotlib.pyplot as plt
+from ArtificialBeeColony.abc_algorithm import ABC
+from ArtificialBeeColony.objection_function import Iris
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import MinMaxScaler
-
-import numpy as np
-
-from sklearn.datasets import load_iris
-
 
 dataset=load_iris()
 data_inputs = np.array(dataset.data)

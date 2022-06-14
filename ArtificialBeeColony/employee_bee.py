@@ -1,4 +1,4 @@
-from artificial_bee import ArtificialBee
+from ArtificialBeeColony.artificial_bee import ArtificialBee
 import numpy as np
 
 class EmployeeBee(ArtificialBee):

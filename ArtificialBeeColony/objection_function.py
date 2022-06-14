@@ -1,20 +1,11 @@
 import numpy as np
-
-from scipy import optimize
-from deap.benchmarks import schwefel
-
-from abc import ABCMeta
-from abc import abstractmethod
-from six import add_metaclass
 import ANN
-import numpy
 from sklearn.datasets import load_iris
 
-
 dataset=load_iris()
-data_inputs = numpy.array(dataset.data)
-data_outputs = numpy.array(dataset.target)
-features_STDs = numpy.std(a=data_inputs, axis=0)
+data_inputs = np.array(dataset.data)
+data_outputs = np.array(dataset.target)
+features_STDs = np.std(a=data_inputs, axis=0)
 
 class Iris():
 

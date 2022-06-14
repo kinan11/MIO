@@ -1,11 +1,11 @@
-from copy import deepcopy
 import numpy as np
-from employee_bee import EmployeeBee
-from onlooker_bee import OnLookerBee
+from copy import deepcopy
+from ArtificialBeeColony.employee_bee import EmployeeBee
+from ArtificialBeeColony.onlooker_bee import OnLookerBee
 
 class ABC(object):
 
-    def __init__(self, obj_function, colony_size=30, n_iter=5000, max_trials=100):
+    def __init__(self, obj_function, colony_size, n_iter, max_trials):
         self.colony_size = colony_size
         self.obj_function = obj_function
 
