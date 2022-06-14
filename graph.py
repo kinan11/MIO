@@ -27,18 +27,19 @@ for instance in data:
     custom_tgt.append(assign_centroid(centroids, instance))
 
 colors = ['r', 'g', 'b']
-plt.figure(figsize=(9,8))
+plt.figure(figsize=(9,9))
+
 for instance, tgt in zip(data, custom_tgt):
     plt.scatter(instance[0], instance[1], s=50, edgecolor='w',alpha=0.5, color=colors[tgt])
-
 for centroid in centroids:
     plt.scatter(centroids[centroid][0], centroids[centroid][1],  color='k', marker='x', lw=5, s=500)
+
 plt.title('Partitioned Data found by ABC')
+plt.ylabel('SepalWidthCm')
+plt.xlabel('PetalWidthCm')
 plt.show()
-itr = range(len(optimizer.optimality_tracking))
-val = optimizer.optimality_tracking
-plt.figure(figsize=(10, 9))
-plt.plot(itr, val)
+plt.figure(figsize=(9,5))
+plt.plot(range(len(optimizer.optimality_tracking)), optimizer.optimality_tracking, linewidth=3, color="black")
 plt.title('Sum of Squared Errors')
 plt.ylabel('Fitness')
 plt.xlabel('Iteration')

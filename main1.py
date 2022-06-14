@@ -102,8 +102,11 @@ while generation < num_generations and gbest[1]-m<5:
                 v[i][0][j][k] = random.uniform(0.4, 0.9)*v[i][0][j][k] + (random.uniform(0, c1) * (x[pbest[0]][0][j][k] - x[i][0][j][k]) + random.uniform(0, c2) * (x[gbest[0]][0][j][k] - x[i][0][j][k])) #inertia-weight
                 x[i][0][j][k]+=v[i][0][j][k]
 
-plt.plot(range(generation),accuracies)
-plt.xlabel('Iteration')
-plt.ylabel('Accuracy')
+plt.figure(figsize=(9, 5))
+plt.plot(range(generation),accuracies, linewidth=3, color="black")
+plt.xlabel("Iteration", fontsize=12)
+plt.ylabel("Fitness", fontsize=12)
+plt.xticks(numpy.arange(0, generation+1, 1), fontsize=8)
+plt.yticks(numpy.arange(0, 101, 5), fontsize=8)
 plt.show()
 print(accuracies)

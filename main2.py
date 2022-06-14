@@ -94,11 +94,12 @@ best_weights = pop_weights_mat [0, :]
 acc, predictions = ANN.predict_outputs(best_weights, data_inputs, data_outputs, activation="sigmoid")
 print("Accuracy of the best solution is : ", acc)
 
-matplotlib.pyplot.plot(accuracies, linewidth=5, color="black")
-matplotlib.pyplot.xlabel("Iteration", fontsize=20)
-matplotlib.pyplot.ylabel("Fitness", fontsize=20)
-matplotlib.pyplot.xticks(numpy.arange(0, num_generations+1, 100), fontsize=15)
-matplotlib.pyplot.yticks(numpy.arange(0, 101, 5), fontsize=15)
+matplotlib.pyplot.figure(figsize=(9, 5))
+matplotlib.pyplot.plot(accuracies, linewidth=3, color="black")
+matplotlib.pyplot.xlabel("Iteration", fontsize=12)
+matplotlib.pyplot.ylabel("Fitness", fontsize=12)
+matplotlib.pyplot.xticks(numpy.arange(0, num_generations+1, 1), fontsize=8)
+matplotlib.pyplot.yticks(numpy.arange(0, 101, 5), fontsize=8)
 matplotlib.pyplot.show()
 
 f = open("weights_"+str(num_generations)+"_iterations_"+str(mutation_percent)+"%_mutation.pkl", "wb")

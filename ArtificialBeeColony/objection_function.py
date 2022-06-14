@@ -1,5 +1,5 @@
-import numpy as np
 import ANN
+import numpy as np
 from sklearn.datasets import load_iris
 
 dataset=load_iris()
