@@ -1,9 +1,7 @@
 import numpy
 import ga
-import pickle
 import ANN
 import random
-import matplotlib.pyplot
 from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
 import math

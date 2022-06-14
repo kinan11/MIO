@@ -16,7 +16,10 @@ class SumOfSquaredErrors():
     def sample(self):
         return np.random.uniform(low=self.minf, high=self.maxf, size=self.dim)
 
-
+    def decode(self, x):
+        centroids = x.reshape(self.n_clusters,  self.data.shape[1])
+        self.centroids = dict(enumerate(centroids))
+        
     def evaluate(self, x):
         self.decode(x)
 
