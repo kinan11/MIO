@@ -31,12 +31,10 @@ for instance in data:
 colors = ['r', 'g', 'b']
 plt.figure(figsize=(9,8))
 for instance, tgt in zip(data, custom_tgt):
-    plt.scatter(instance[0], instance[1], s=50, edgecolor='w',
-                alpha=0.5, color=colors[tgt])
+    plt.scatter(instance[0], instance[1], s=50, edgecolor='w',alpha=0.5, color=colors[tgt])
 
 for centroid in centroids:
-    plt.scatter(centroids[centroid][0], centroids[centroid][1],
-                color='k', marker='x', lw=5, s=500)
+    plt.scatter(centroids[centroid][0], centroids[centroid][1],  color='k', marker='x', lw=5, s=500)
 plt.title('Partitioned Data found by ABC')
 plt.show()
 itr = range(len(optimizer.optimality_tracking))

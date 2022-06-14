@@ -22,16 +22,12 @@ data = MinMaxScaler().fit_transform(load_iris()['data'])
 
 objective_function = Iris(dim=16)
 
-optimizer = ABC(obj_function=objective_function, colony_size=30,
-                n_iter=300, max_trials=100)
+optimizer = ABC(obj_function=objective_function, colony_size=30, n_iter=300, max_trials=100)
 optimizer.optimize()
-print(optimizer.optimal_solution.pos.reshape(1,1,4,4))
+print("Wagi optymalnego rozwiązania: ",optimizer.optimal_solution.pos.reshape(1,1,4,4))
 
 acc, predictions = ANN.predict_outputs(optimizer.optimal_solution.pos.reshape(1,1,4,4)[0], data_inputs, data_outputs)
-print("Accuracy of the best solution is : ", acc)
-
-acc = ANN.fitness(optimizer.optimal_solution.pos.reshape(1,1,4,4), data_inputs, data_outputs)[0]
-print("Accuracy of the best solution is : ", acc)
+print("Najlepsza dokładność : ", acc)
 
 values = 1/np.array(optimizer.optimality_tracking)
 values = np.insert(values,0,0)

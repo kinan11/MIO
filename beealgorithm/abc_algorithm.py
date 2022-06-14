@@ -50,21 +50,15 @@ class ABC(object):
         list(map(lambda bee: bee.compute_prob(sum_fitness), self.employee_bees))
 
     def __select_best_food_sources(self):
-        self.best_food_sources =\
-            list(filter(lambda bee: bee.prob > np.random.uniform(low=0, high=1),
-                   self.employee_bees))
+        self.best_food_sources =list(filter(lambda bee: bee.prob > np.random.uniform(low=0, high=1),self.employee_bees))
         while not self.best_food_sources:
-            self.best_food_sources = \
-                list(filter(lambda bee: bee.prob > np.random.uniform(low=0, high=1),
-                       self.employee_bees))
+            self.best_food_sources = list(filter(lambda bee: bee.prob > np.random.uniform(low=0, high=1),self.employee_bees))
 
     def __onlooker_bees_phase(self):
-        list(map(lambda bee: bee.onlook(self.best_food_sources, self.max_trials),
-            self.onlokeer_bees))
+        list(map(lambda bee: bee.onlook(self.best_food_sources, self.max_trials),self.onlokeer_bees))
 
     def __scout_bees_phase(self):
-        list(map(lambda bee: bee.reset_bee(self.max_trials),
-            self.onlokeer_bees + self.employee_bees))
+        list(map(lambda bee: bee.reset_bee(self.max_trials),self.onlokeer_bees + self.employee_bees))
 
     def optimize(self):
         self.__reset_algorithm()
@@ -82,7 +76,4 @@ class ABC(object):
 
             self.__update_optimal_solution()
             self.__update_optimality_tracking()
-            # print("iter: {} = cost: {}"
-            #       .format(itr, "%04.03e" % self.optimal_solution.fitness))
-            print("iter: {} = cost: {}"
-                  .format(itr, 1/self.optimal_solution.fitness))
+            print("iter: {} = cost: {}".format(itr, 1/self.optimal_solution.fitness))
