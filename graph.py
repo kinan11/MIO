@@ -12,11 +12,12 @@ def assign_centroid(centroids, point):
     distances = [np.linalg.norm(point - centroids[idx]) for idx in centroids]
     return np.argmin(distances)
 
-data = MinMaxScaler().fit_transform(load_iris()['data'])
+data = MinMaxScaler().fit_transform(load_iris()['data'][:, [1,3]])
 
 objective_function = SumOfSquaredErrors(dim=6, n_clusters=3, data=data)
 
 optimizer = ABC(obj_function=objective_function, colony_size=30, n_iter=300, max_trials=100)
+
 optimizer.optimize()
 
 centroids = dict(enumerate(decode_centroids(optimizer.optimal_solution.pos, n_clusters=3, data=data)))
