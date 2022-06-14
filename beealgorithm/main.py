@@ -13,10 +13,9 @@ from sklearn.datasets import load_iris
 
 
 dataset=load_iris()
-data_inputs2 = np.array(dataset.data)
+data_inputs = np.array(dataset.data)
 data_outputs = np.array(dataset.target)
-features_STDs = np.std(a=data_inputs2, axis=0)
-data_inputs = data_inputs2[:,]
+features_STDs = np.std(a=data_inputs, axis=0)
 
 data = MinMaxScaler().fit_transform(load_iris()['data'])
 
