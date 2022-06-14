@@ -1,52 +1,21 @@
 import numpy as np
-from abc import ABCMeta
-from abc import abstractmethod
-from six import add_metaclass
 
-@add_metaclass(ABCMeta)
-class ObjectiveFunction(object):
+class SumOfSquaredErrors():
 
-    def __init__(self, name, dim, minf, maxf):
-        self.name = name
+    def __init__(self, dim, n_clusters, data):
+        self.n_clusters = n_clusters
+        self.centroids = {}
+        self.data = data
         self.dim = dim
-        self.minf = minf
-        self.maxf = maxf
+        self.minf = 0.0
+        self.maxf = 1.0
+
+    def custom_sample(self):
+        return np.repeat(self.minf, repeats=self.dim) + np.random.uniform(low=0, high=1, size=self.dim) * np.repeat(self.maxf - self.minf, repeats=self.dim)
 
     def sample(self):
         return np.random.uniform(low=self.minf, high=self.maxf, size=self.dim)
 
-    def custom_sample(self):
-        return np.repeat(self.minf, repeats=self.dim) \
-               + np.random.uniform(low=0, high=1, size=self.dim) *\
-               np.repeat(self.maxf - self.minf, repeats=self.dim)
-
-    @abstractmethod
-    def evaluate(self, x):
-        pass
-
-@add_metaclass(ABCMeta)
-class PartitionalClusteringObjectiveFunction(ObjectiveFunction):
-
-    def __init__(self, dim, n_clusters, data):
-        super(PartitionalClusteringObjectiveFunction, self)\
-            .__init__('PartitionalClusteringObjectiveFunction', dim, 0.0, 1.0)
-        self.n_clusters = n_clusters
-        self.centroids = {}
-        self.data = data
-
-    def decode(self, x):
-        centroids = x.reshape(self.n_clusters,  self.data.shape[1])
-        self.centroids = dict(enumerate(centroids))
-
-    @abstractmethod
-    def evaluate(self, x):
-        pass
-     
-class SumOfSquaredErrors(PartitionalClusteringObjectiveFunction):
-
-    def __init__(self, dim, n_clusters, data):
-        super(SumOfSquaredErrors, self).__init__(dim, n_clusters, data)
-        self.name = 'SumOfSquaredErrors'
 
     def evaluate(self, x):
         self.decode(x)
