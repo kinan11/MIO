@@ -3,16 +3,13 @@ import ga
 import pickle
 import ANN
 import matplotlib.pyplot
+from sklearn.datasets import load_iris
 
-f = open("dataset_features.pkl", "rb")
-data_inputs2 = pickle.load(f)
-f.close()
+dataset=load_iris()
+data_inputs2 = numpy.array(dataset.data)
+data_outputs = numpy.array(dataset.target)
 features_STDs = numpy.std(a=data_inputs2, axis=0)
-data_inputs = data_inputs2[:, features_STDs>50]
-
-f = open("outputs.pkl", "rb")
-data_outputs = pickle.load(f)
-f.close()
+data_inputs = data_inputs2[:,]
 
 """
 Genetic algorithm parameters:
