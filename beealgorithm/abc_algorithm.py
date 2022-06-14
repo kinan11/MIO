@@ -23,9 +23,7 @@ class ABC(object):
         self.optimality_tracking.append(self.optimal_solution.fitness)
 
     def __update_optimal_solution(self):
-        n_optimal_solution = \
-            min(self.onlokeer_bees + self.employee_bees,
-                key=lambda bee: bee.fitness)
+        n_optimal_solution = min(self.onlokeer_bees + self.employee_bees, key=lambda bee: bee.fitness)
         if not self.optimal_solution:
             self.optimal_solution = deepcopy(n_optimal_solution)
         else:
